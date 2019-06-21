@@ -5,7 +5,7 @@
 [ext_resource path="res://Sprites/Bricks/defaultbrick_broken.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 197, 64 )
+extents = Vector2( 192.432, 64.1759 )
 
 [node name="brick" type="StaticBody2D"]
 collision_layer = 6
@@ -13,16 +13,19 @@ script = ExtResource( 1 )
 color = "default"
 
 [node name="max_health" type="Sprite" parent="."]
-scale = Vector2( 0.26, 0.31 )
+position = Vector2( 0, 0.0677321 )
+scale = Vector2( 0.26, 0.311058 )
 texture = ExtResource( 2 )
 
 [node name="half_health" type="Sprite" parent="."]
 visible = false
-scale = Vector2( 0.26, 0.31 )
+position = Vector2( 0, 0.0677321 )
+scale = Vector2( 0.26, 0.311058 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=[
 "brick",
 ]]
+position = Vector2( 0, 0.0523434 )
 scale = Vector2( 0.26, 0.31 )
 shape = SubResource( 1 )
