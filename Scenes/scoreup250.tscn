@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/scoreup50.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sprites/Other/39-Breakout-Tiles.png" type="Texture" id=2]
+
+[node name="scoreup250" index="0" instance=ExtResource( 1 )]
+score = 250
+
+[node name="sprite" parent="." index="1"]
+texture = ExtResource( 2 )

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/paddle.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Player/56-Breakout-Tiles.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 69.7007
+height = 561.931
+
+[node name="paddle" type="KinematicBody2D" groups=[
+"paddle",
+]]
+script = ExtResource( 1 )
+
+[node name="shape" type="CollisionShape2D" parent="." groups=[
+"paddle",
+]]
+rotation = 1.5708
+scale = Vector2( 0.2, 0.2 )
+shape = SubResource( 1 )
+
+[node name="sprite" type="Sprite" parent="."]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 2 )
