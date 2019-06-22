@@ -6,8 +6,6 @@ onready var ball_holder = get_tree().get_root().get_child(get_tree().get_root().
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
-	ball_holder.add_child(self)
 	set_physics_process(true)
 	pass # Replace with function body.
 
@@ -21,5 +19,6 @@ func _physics_process(delta):
 			collision.collider.hit()
 	
 	if position.y > 1130:
+		game_manager.ballsInPlay -= 1
 		queue_free()
 	pass

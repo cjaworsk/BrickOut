@@ -2,22 +2,25 @@ extends StaticBody2D
 
 export (String) var color;
 var health = 1
+var max_health
 signal addScore
 
 # preload all the powerups
-var scoreups = [
+var powerups = [
 preload("res://Scenes/scoreup50.tscn"),
 preload("res://Scenes/scoreup100.tscn"),
+preload("res://Scenes/extra_ball.tscn"),
 preload("res://Scenes/scoreup250.tscn"),
 preload("res://Scenes/scoreup500.tscn")
 ]
-var scoreup_prob = [30, 15, 10, 5]
+var powerup_prob = [20, 10, 10, 8, 5]
 onready var powerup_holder = get_node("/root/stage_one/GameLayer/power_holder")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group("brick")
+	max_health = health
 	pass # Replace with function body.
 
 func hit():
@@ -33,22 +36,22 @@ func hit():
 func break_brick():
 	var s
 	#add 10 per brick
-	game_manager.score += 10
-	emit_signal("addScore")
+	game_manager.score += 10 * max_health * max_health
 	s = calc_powerups()
 	if s:
 		s.position = position
 		powerup_holder.add_child(s)
+	game_manager.check_level()
 	queue_free()  #destroy
 	pass
 
 func calc_powerups():
 	randomize()
 	var cumProb = 0
-	var currentProb = int(rand_range(0, 101))
+	var currentProb = int(rand_range(0, 201))
 	
-	for i in range(scoreup_prob.size()):
-		cumProb += scoreup_prob[i]
+	for i in range(powerup_prob.size()):
+		cumProb += powerup_prob[i]
 		if currentProb <= cumProb:
-			return scoreups[i].instance()
+			return powerups[i].instance()
 	pass

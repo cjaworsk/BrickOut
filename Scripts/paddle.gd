@@ -4,8 +4,6 @@ var SMALL = 0
 onready var MEDIUM = get_node("sprite").frames.get_frame("mediumpaddle", 0).get_width() * 0.2 / 2
 var LARGE
 
-var pos setget , get_pos
-
 func _ready():
 	add_to_group("paddle")
 	get_node("sprite").playing = true
@@ -21,6 +19,3 @@ func _physics_process(delta):
 	var view = get_viewport_rect().size
 	self.position.x = clamp(self.position.x , + MEDIUM + 20, view.x - MEDIUM - 20)
 	pass
-
-func get_pos():
-	return position

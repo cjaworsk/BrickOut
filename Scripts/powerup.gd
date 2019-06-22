@@ -13,6 +13,6 @@ func _ready():
 func _process(delta):
 	translate(velocity * delta)
 	
-	if position.y > viewsize.y:
+	if position.y > viewsize.y - 220:
 		queue_free()
 	pass

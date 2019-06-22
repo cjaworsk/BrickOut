@@ -1,6 +1,5 @@
 extends "res://Scripts/powerup.gd"
 
-var scoreNode
 export (int) var score
 
 func _ready():
