@@ -1,11 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/paddle.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Player/56-Breakout-Tiles.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Player/52-Breakout-Tiles.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Player/51-Breakout-Tiles.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 69.7007
-height = 561.931
+height = 366.096
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "mediumpaddle",
+"speed": 5.0
+} ]
 
 [node name="paddle" type="KinematicBody2D" groups=[
 "paddle",
@@ -19,6 +28,7 @@ rotation = 1.5708
 scale = Vector2( 0.2, 0.2 )
 shape = SubResource( 1 )
 
-[node name="sprite" type="Sprite" parent="."]
+[node name="sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 2 )
+frames = SubResource( 2 )
+animation = "mediumpaddle"

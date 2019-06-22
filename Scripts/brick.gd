@@ -2,7 +2,7 @@ extends StaticBody2D
 
 export (String) var color;
 var health = 1
-signal addScore(new_value)
+signal addScore
 
 # preload all the powerups
 var scoreups = [
@@ -12,6 +12,8 @@ preload("res://Scenes/scoreup250.tscn"),
 preload("res://Scenes/scoreup500.tscn")
 ]
 var scoreup_prob = [30, 15, 10, 5]
+onready var powerup_holder = get_node("/root/stage_one/GameLayer/power_holder")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,11 +33,12 @@ func hit():
 func break_brick():
 	var s
 	#add 10 per brick
-	get_node("/root/stage_one/Panel/score").score = 10
+	game_manager.score += 10
+	emit_signal("addScore")
 	s = calc_powerups()
 	if s:
 		s.position = position
-		get_node("/root/stage_one/power_holder").add_child(s)
+		powerup_holder.add_child(s)
 	queue_free()  #destroy
 	pass
 

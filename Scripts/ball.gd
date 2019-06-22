@@ -1,10 +1,13 @@
 extends KinematicBody2D
 
-var health = 2
 export (Vector2) var velocity
+
+onready var ball_holder = get_tree().get_root().get_child(get_tree().get_root().get_child_count()-1).get_node("GameLayer/ball_holder")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	ball_holder.add_child(self)
 	set_physics_process(true)
 	pass # Replace with function body.
 
@@ -16,4 +19,7 @@ func _physics_process(delta):
 		velocity = velocity.bounce(collision.normal)
 		if collision.collider.has_method("hit"):
 			collision.collider.hit()
+	
+	if position.y > 1130:
+		queue_free()
 	pass
