@@ -1,8 +1,8 @@
 extends Node
 
-var score = 0 setget set_score, get_score 
-var ballsInPlay = 1 setget set_balls_in_play, get_balls_in_play
-var ballsInHand = 2 setget set_balls_in_hand, get_balls_in_hand
+var score = 100 setget set_score, get_score 
+var ballsInPlay = 0 setget set_balls_in_play, get_balls_in_play
+var ballsInHand = 3 setget set_balls_in_hand, get_balls_in_hand
 
 var current_scene = null
 var stage_num = 1
@@ -37,23 +37,40 @@ func _deferred_goto_scene(path):
 	pass
 
 func trigger_game_over():
-	#pause game
+	#log and enter name if high score
 	
-	
-	#log enter name if high score
-	
-	#goto game over scene
-	
+	#go to gameover scene
+	goto_scene("res://Stages/game_over.tscn")
 	pass
 
 func refresh_ui():
 	set_score(score)
 	change_ball_label()
+	current_scene.get_node("PauseLayer/round_start/round_label").text = "ROUND " + str(stage_num)
+	if stage_num == 1:
+		current_scene.get_node("PauseLayer/round_start/round_label/first_round_help").visible = true
+		ballsInHand = 3
+		ballsInPlay = 0
+		score = 100
+	else:
+		current_scene.get_node("PauseLayer/round_start/round_label/first_round_help").visible = false
+	yield(get_tree().create_timer(1.5), "timeout")
+	current_scene.get_node("PauseLayer/round_start/round_label").visible = false
 	pass
 
 func check_level():
-	if not current_scene.get_node("GameLayer/brick_holder").get_child_count():
+	if current_scene.get_node("GameLayer/brick_holder").get_child_count() == 1:
+		end_round()
+		yield(get_tree().create_timer(1.5), "timeout")
 		goto_scene("res://Stages/stage_one.tscn")
+	pass
+
+func end_round():
+	current_scene.get_node("GameLayer/ball_holder").remove_balls()
+	current_scene.get_node("PauseLayer/round_start/round_label").text = "ROUND CLEAR!"
+	stage_num += 1
+	ballsInHand += ballsInPlay
+	ballsInPlay = 0
 	pass
 
 ## ---- SCORE ---- ##

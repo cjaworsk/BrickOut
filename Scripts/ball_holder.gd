@@ -27,3 +27,8 @@ func _on_btn_ball_pressed():
 	if game_manager.ballsInHand:
 		spawn_ball()
 	pass # Replace with function body.
+
+func remove_balls():
+	for b in get_child_count():
+		print(get_child(2))
+	pass
